@@ -1,3 +1,4 @@
+// Kevin McEnroe
 package com.dkit.gd2.ca1.kevinmcenroe;
 
 import java.io.BufferedReader;
@@ -21,6 +22,9 @@ public class App
         for (int i = 0; i < chosenGrades.length; i++) {
             System.out.println(chosenGrades[i]);
         }
+
+        double finalAverage = calculateAverage(chosenGrades);
+        System.out.println("Final Average = " + finalAverage);
     }
 
     static public ArrayList<StudentRecord> readResults() {
@@ -88,9 +92,14 @@ public class App
         return selectedGrades;
     }
 
-    private double calculateAverage( int[] selectedGrades) {
-        double average = 1.0;
+    private static double calculateAverage( int[] selectedGrades) {
+        double average = 0.0;
 
+        for(double grade : selectedGrades){
+            average += grade;
+        }
+
+        average /= selectedGrades.length;
         return average;
     }
 }

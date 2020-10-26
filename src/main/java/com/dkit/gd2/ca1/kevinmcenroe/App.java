@@ -1,4 +1,4 @@
-// Kevin McEnroe
+// Kevin McEnroe, Student ID: D00242092
 package com.dkit.gd2.ca1.kevinmcenroe;
 
 import java.io.BufferedReader;
@@ -24,7 +24,7 @@ public class App
         }
 
         double finalAverage = calculateAverageGrade(chosenGrades);
-        System.out.println("Final Average = " + finalAverage);
+        System.out.println("Average = " + finalAverage);
     }
 
     static public ArrayList<StudentRecord> readResultsFromFile(String readFileName) {

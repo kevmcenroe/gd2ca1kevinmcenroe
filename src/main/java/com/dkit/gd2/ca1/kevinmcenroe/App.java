@@ -22,7 +22,7 @@ public class App
             System.out.println(chosenGrades[i]);
         }
 
-        double finalAverage = calculateAverage(chosenGrades);
+        double finalAverage = calculateAverageGrade(chosenGrades);
         System.out.println("Final Average = " + finalAverage);
     }
 
@@ -90,7 +90,7 @@ public class App
         return selectedGrades;
     }
 
-    private static double calculateAverage( int[] selectedGrades) {
+    protected static double calculateAverageGrade( int[] selectedGrades) {
         double average = 0.0;
 
         for(double grade : selectedGrades){

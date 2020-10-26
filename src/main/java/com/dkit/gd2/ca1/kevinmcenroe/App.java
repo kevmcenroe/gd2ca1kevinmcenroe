@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class App 
@@ -64,10 +65,8 @@ public class App
         final int subjectCode_CSPE = 218;
 
         int[] selectedGrades = {0,0,0,0,0};
-        int[] remainingGrades = {0,0,0,0,0};
-       // ArrayList<Integer> remainingGrades = new ArrayList<>();
+        ArrayList<Integer> remainingGrades = new ArrayList<>();
         int selectedGradesCounted = 0;
-        int remainingGradesCounted = 0;
 
         for (int i = 0; i < codes.length; i++) {
             if(codes[i] == subjectCode_Irish || codes[i] == subjectCode_English || codes[i] == subjectCode_Maths){
@@ -75,18 +74,13 @@ public class App
                 selectedGradesCounted++;
             }
             else if(codes[i] != subjectCode_CSPE){
-                remainingGrades[remainingGradesCounted] = grades[i];
-              //  remainingGrades.add(grades[i]);
-                remainingGradesCounted++;
+                remainingGrades.add(grades[i]);
             }
         }
 
-        Arrays.sort(remainingGrades);
-       // Collections.sort(remainingGrades);
-      //  int highestGrade = remainingGrades.get(remainingGrades.size() - 1);
-      //  int secondHighestGrade = remainingGrades.get(remainingGrades.size() - 2);
-          int highestGrade = remainingGrades[remainingGrades.length - 1];
-          int secondHighestGrade = remainingGrades[remainingGrades.length - 2];
+        Collections.sort(remainingGrades);
+        int highestGrade = remainingGrades.get(remainingGrades.size() - 1);
+        int secondHighestGrade = remainingGrades.get(remainingGrades.size() - 2);
 
         selectedGrades[selectedGradesCounted] = highestGrade;
         selectedGradesCounted++;

@@ -6,14 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class App 
 {
     public static void main( String[] args )
     {
-        ArrayList<StudentRecord> allRecords = new ArrayList<StudentRecord>(readResultsFromFile());
+        ArrayList<StudentRecord> allRecords = new ArrayList<StudentRecord>(readResultsFromFile("JC_Results.txt"));
 
         int[] testCodes = allRecords.get(0).subjectCodes.stream().mapToInt(i->i).toArray();
         int[] testGrades = allRecords.get(0).subjectGrades.stream().mapToInt(i->i).toArray();
@@ -27,10 +26,10 @@ public class App
         System.out.println("Final Average = " + finalAverage);
     }
 
-    static public ArrayList<StudentRecord> readResultsFromFile() {
+    static public ArrayList<StudentRecord> readResultsFromFile(String readFileName) {
         ArrayList<StudentRecord> allStudentRecords = new ArrayList<>();
 
-        try(Scanner fileScanner = new Scanner(new BufferedReader( new FileReader("JC_Results.txt")))) {
+        try(Scanner fileScanner = new Scanner(new BufferedReader( new FileReader(readFileName)))) {
             fileScanner.useDelimiter(",");
 
             while(fileScanner.hasNextLine()) {

@@ -6,14 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class App 
 {
     public static void main( String[] args )
     {
-        ArrayList<StudentRecord> allRecords = new ArrayList<StudentRecord>(readResults());
+        ArrayList<StudentRecord> allRecords = new ArrayList<StudentRecord>(readResultsFromFile());
 
         int[] testCodes = allRecords.get(0).subjectCodes.stream().mapToInt(i->i).toArray();
         int[] testGrades = allRecords.get(0).subjectGrades.stream().mapToInt(i->i).toArray();
@@ -27,9 +26,8 @@ public class App
         System.out.println("Final Average = " + finalAverage);
     }
 
-    static public ArrayList<StudentRecord> readResults() {
-        HashMap<Integer, Integer> subjectGrades = new HashMap<Integer, Integer>();
-        ArrayList<StudentRecord> allStudentRecords = new ArrayList<StudentRecord>();
+    static public ArrayList<StudentRecord> readResultsFromFile() {
+        ArrayList<StudentRecord> allStudentRecords = new ArrayList<>();
 
         try(Scanner fileScanner = new Scanner(new BufferedReader( new FileReader("JC_Results.txt")))) {
             fileScanner.useDelimiter(",");
@@ -38,8 +36,8 @@ public class App
                 String lineContent[] = fileScanner.nextLine().split(",");
 
                 int studentNumber = Integer.parseInt(lineContent[0]);
-                ArrayList<Integer> studentGrades = new ArrayList<Integer>();
-                ArrayList<Integer> studentSubjects = new ArrayList<Integer>();
+                ArrayList<Integer> studentGrades = new ArrayList<>();
+                ArrayList<Integer> studentSubjects = new ArrayList<>();
 
                 for (int i = 1; i < lineContent.length - 1; i+=2) {
                     int subjectCode = Integer.parseInt(lineContent[i]);
@@ -60,10 +58,10 @@ public class App
     }
 
     public static int[] selectFiveGrades(int[] codes, int[] grades){
-        int subjectCode_Irish = 1;
-        int subjectCode_English = 2;
-        int subjectCode_Maths = 3;
-        int subjectCode_CSPE = 218;
+        final int subjectCode_Irish = 1;
+        final int subjectCode_English = 2;
+        final int subjectCode_Maths = 3;
+        final int subjectCode_CSPE = 218;
 
         int[] selectedGrades = {0,0,0,0,0};
         int[] remainingGrades = {0,0,0,0,0};

@@ -5,9 +5,8 @@ import java.util.ArrayList;
 
 public class StudentRecord {
     int studentNumber;
-    ArrayList<Integer> subjectCodes = new ArrayList<Integer>();
-    ArrayList<Integer> subjectGrades = new ArrayList<Integer>();
-
+    ArrayList<Integer> subjectCodes;
+    ArrayList<Integer> subjectGrades;
 
     public StudentRecord(int inputStudentNumber, ArrayList<Integer> inputSubjects, ArrayList<Integer> inputGrades) {
         this.studentNumber = inputStudentNumber;

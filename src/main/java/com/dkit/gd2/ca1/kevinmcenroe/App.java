@@ -14,17 +14,7 @@ public class App
     public static void main( String[] args )
     {
         ArrayList<StudentRecord> allRecords = new ArrayList<StudentRecord>(readResultsFromFile("JC_Results.txt"));
-
-        int[] testCodes = allRecords.get(0).subjectCodes.stream().mapToInt(i->i).toArray();
-        int[] testGrades = allRecords.get(0).subjectGrades.stream().mapToInt(i->i).toArray();
-
-        int[] chosenGrades = selectFiveGrades(testCodes, testGrades);
-        for (int i = 0; i < chosenGrades.length; i++) {
-            System.out.println(chosenGrades[i]);
-        }
-
-        double finalAverage = calculateAverageGrade(chosenGrades);
-        System.out.println("Average = " + finalAverage);
+        getAverageGradePerStudent(allRecords);
     }
 
     static public ArrayList<StudentRecord> readResultsFromFile(String readFileName) {
@@ -34,7 +24,7 @@ public class App
             fileScanner.useDelimiter(",");
 
             while(fileScanner.hasNextLine()) {
-                String lineContent[] = fileScanner.nextLine().split(",");
+                String[] lineContent = fileScanner.nextLine().split(",");
 
                 int studentNumber = Integer.parseInt(lineContent[0]);
                 ArrayList<Integer> studentGrades = new ArrayList<>();
@@ -99,5 +89,16 @@ public class App
 
         average /= selectedGrades.length;
         return average;
+    }
+
+    protected static void getAverageGradePerStudent(ArrayList<StudentRecord> inputRecords){
+        for (StudentRecord inputRecord : inputRecords) {
+            int[] subjectCodes = inputRecord.subjectCodes.stream().mapToInt(i -> i).toArray();
+            int[] subjectGrades = inputRecord.subjectGrades.stream().mapToInt(i -> i).toArray();
+            int[] chosenGrades = selectFiveGrades(subjectCodes, subjectGrades);
+            double averageGrade = calculateAverageGrade(chosenGrades);
+
+            System.out.println(inputRecord.studentNumber + " " + averageGrade);
+        }
     }
 }

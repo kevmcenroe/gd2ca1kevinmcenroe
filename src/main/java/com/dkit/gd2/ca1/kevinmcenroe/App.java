@@ -13,12 +13,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        ArrayList<StudentRecord> allRecords = new ArrayList<StudentRecord>(readResultsFromFile("JC_Results.txt"));
-        getAverageGradePerStudent(allRecords);
+        ArrayList<StudentRecord> studentRecords = new ArrayList<StudentRecord>(readResultsFromFile("JC_Results.txt"));
+        getAverageGradePerStudent(studentRecords);
     }
 
     static public ArrayList<StudentRecord> readResultsFromFile(String readFileName) {
-        ArrayList<StudentRecord> allStudentRecords = new ArrayList<>();
+        ArrayList<StudentRecord> readStudentRecords = new ArrayList<>();
 
         try(Scanner fileScanner = new Scanner(new BufferedReader( new FileReader(readFileName)))) {
             fileScanner.useDelimiter(",");
@@ -38,14 +38,14 @@ public class App
                     studentGrades.add(subjectGrade);
                 }
 
-                allStudentRecords.add(new StudentRecord(studentNumber, studentSubjects, studentGrades));
+                readStudentRecords.add(new StudentRecord(studentNumber, studentSubjects, studentGrades));
             }
         }
         catch(FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         }
 
-        return allStudentRecords;
+        return readStudentRecords;
     }
 
     public static int[] selectFiveGrades(int[] codes, int[] grades){
@@ -91,14 +91,14 @@ public class App
         return average;
     }
 
-    protected static void getAverageGradePerStudent(ArrayList<StudentRecord> inputRecords){
-        for (StudentRecord inputRecord : inputRecords) {
-            int[] subjectCodes = inputRecord.subjectCodes.stream().mapToInt(i -> i).toArray();
-            int[] subjectGrades = inputRecord.subjectGrades.stream().mapToInt(i -> i).toArray();
+    protected static void getAverageGradePerStudent(ArrayList<StudentRecord> inputStudentRecords){
+        for (StudentRecord inputStudentRecord : inputStudentRecords) {
+            int[] subjectCodes = inputStudentRecord.subjectCodes.stream().mapToInt(i -> i).toArray();
+            int[] subjectGrades = inputStudentRecord.subjectGrades.stream().mapToInt(i -> i).toArray();
             int[] chosenGrades = selectFiveGrades(subjectCodes, subjectGrades);
             double averageGrade = calculateAverageGrade(chosenGrades);
 
-            System.out.println(inputRecord.studentNumber + " " + averageGrade);
+            System.out.println(inputStudentRecord.studentNumber + " " + averageGrade);
         }
     }
 }
